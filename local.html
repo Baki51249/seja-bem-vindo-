@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>local</title>
+    <style>
+        body {
+            background-image: url(vecteezy_fantasy-island-with-waterfalls-3d-illustration-elements-of_22653879_206.jpg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+             height: 1000px;
+        }
+
+        .modal-bg {
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(31, 31, 31, 0.537);
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal {
+            background-color: white;
+            width: 200px;
+            height: 150px;
+        }
+
+        h1 {
+            color: brown;
+            text-align: center;
+            width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        }
+
+        button {
+            position: absolute;
+            padding: 11px;
+            width: 150px;
+            right: 50px;
+            top: 20px;
+            background-color: blue;
+            color: white;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="welcome"></h1>
+
+    <button onclick="openModal()">Exibir Dados</button>
+
+    <div class="modal-bg" id="modal-bg">
+        <div class="modal" id="modal"></div>
+    </div>
+
+    <script>
+        var nome = localStorage.getItem("nome");
+
+        if (nome == null) {
+            nome = prompt("Qual é o seu nome?");
+            localStorage.setItem("nome", nome);
+        }
+
+        var cpf = localStorage.getItem("cpf");
+
+        if (cpf == null) {
+            cpf = prompt("Qual é o seu CPF?");
+            localStorage.setItem("cpf", cpf);
+        }
+
+        var welcome = document.getElementById("welcome");
+        welcome.innerText = "Seja bem-vindo, " + nome + " !";
+
+        var modalBg = document.getElementById("modal-bg");
+        var modal = document.getElementById("modal");
+
+        function openModal() {
+            modalBg.style.display = "flex";
+            modal.innerHTML = "Nome: " + nome + "<br>CPF: " + cpf;
+        }
+
+        document.addEventListener("click", (event) => {
+            if (event.target.className === "modal-bg") {
+                closeModal();
+            }
+        });
+
+        function closeModal() {
+            modalBg.style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
